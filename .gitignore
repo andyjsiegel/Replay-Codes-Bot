@@ -25,3 +25,6 @@ temp_*
 .idea/
 *.swp
 *.swo
+
+# macOS
+.DS_Store
