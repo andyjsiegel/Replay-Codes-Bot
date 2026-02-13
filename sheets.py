@@ -1,18 +1,32 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import json
+import os
 
 # Service account credentials never expire
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 SERVICE_ACCOUNT_FILE = 'service-account.json'
 
 def get_creds():
-    """Get credentials from service account file.
+    """Get credentials from service account file or environment variable.
     Service account credentials don't expire and are ideal for bots.
     """
-    creds = Credentials.from_service_account_file(
-        SERVICE_ACCOUNT_FILE,
-        scopes=SCOPES
-    )
+    # Check if service account JSON is in environment variable (Railway)
+    service_account_json = os.getenv('GOOGLE_SERVICE_ACCOUNT_JSON')
+
+    if service_account_json:
+        # Parse JSON from environment variable
+        service_account_info = json.loads(service_account_json)
+        creds = Credentials.from_service_account_info(
+            service_account_info,
+            scopes=SCOPES
+        )
+    else:
+        # Fall back to local file
+        creds = Credentials.from_service_account_file(
+            SERVICE_ACCOUNT_FILE,
+            scopes=SCOPES
+        )
     return creds
 
 def update_sheet(spreadsheet_id, data):

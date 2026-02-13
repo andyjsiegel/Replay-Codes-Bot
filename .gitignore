@@ -1,0 +1,27 @@
+# Environment variables and secrets
+config.json
+service-account.json
+token.json
+credentials.json
+*.env
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+
+# Temporary files
+temp_*
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -1,0 +1,6 @@
+{
+    "bot_token": "YOUR_DISCORD_BOT_TOKEN_HERE",
+    "codes_channels": [],
+    "groq_api_key": "YOUR_GROQ_API_KEY_HERE",
+    "spreadsheet_id": "YOUR_SPREADSHEET_ID_HERE"
+}

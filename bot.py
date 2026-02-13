@@ -7,15 +7,26 @@ import sheets
 from datetime import datetime, timedelta
 import pytz
 
-# Load configuration
-with open('config.json', 'r') as f:
-    config = json.load(f)
+# Load configuration from environment variables (Railway) or config.json (local)
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+GROQ_API_KEY = os.getenv('GROQ_API_KEY')
+SPREADSHEET_ID = os.getenv('SPREADSHEET_ID')
 
-# Get the bot token and Groq API key from the config file
-BOT_TOKEN = config['bot_token']
-GROQ_API_KEY = config['groq_api_key']
-codes_channels = config['codes_channels']
-SPREADSHEET_ID = config['spreadsheet_id']
+# Load codes_channels from config.json (or empty list if not exists)
+if os.path.exists('config.json'):
+    with open('config.json', 'r') as f:
+        config = json.load(f)
+    codes_channels = config.get('codes_channels', [])
+    # Use config.json values as fallback if env vars not set
+    if not BOT_TOKEN:
+        BOT_TOKEN = config.get('bot_token')
+    if not GROQ_API_KEY:
+        GROQ_API_KEY = config.get('groq_api_key')
+    if not SPREADSHEET_ID:
+        SPREADSHEET_ID = config.get('spreadsheet_id')
+else:
+    config = {'codes_channels': []}
+    codes_channels = []
 
 # Define the bot's intents
 intents = discord.Intents.default()
