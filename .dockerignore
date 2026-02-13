@@ -1,0 +1,21 @@
+# Don't copy these to Docker image
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.git/
+.gitignore
+.DS_Store
+*.md
+config.json
+service-account.json
+credentials.json
+token.json
+*.env
+.env
+*.png
+codes*.png
