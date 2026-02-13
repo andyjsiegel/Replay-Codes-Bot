@@ -1,0 +1,7 @@
+discord.py
+requests
+opencv-python-headless
+groq
+gspread
+google-auth
+pytz
